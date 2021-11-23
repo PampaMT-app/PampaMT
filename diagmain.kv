@@ -1,0 +1,765 @@
+#: import o os
+
+# Screen for save new project
+<FileSave>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 142,173,232,.1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: 38
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                size_hint_y: None
+                height: 5
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: 30
+
+                Label:
+                    size_hint_x: None
+                    width: 5
+
+                Button:
+                    text: ''
+                    size_hint_x: None
+                    size_hint_y: None
+                    width: 26
+                    height: 26
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_paste.png'
+                    on_press: root.new_dir(dir.path)
+
+                Label:
+                    text: dir.path
+                    size_hint_y: None
+                    height: 25
+                    bold: True
+            Label:
+                size_hint_y: None
+                height: 5
+            Label:
+                size_hint_y: None
+                height: 1
+                canvas.before:
+                    Color:
+                        rgba: 255,255,255,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                size_hint_x: None
+                width: 1
+                canvas.before:
+                    Color:
+                        rgba: 255,255,255,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            FileChooserIconView:
+                size_hint: 1., 1.
+                id: dir
+                rootpath: o.environ['HOME']
+
+            Label:
+                size_hint_x: None
+                width: 1
+                canvas.before:
+                    Color:
+                        rgba: 255,255,255,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+        Label:
+            size_hint_y: None
+            height: 1
+            canvas.before:
+                Color:
+                    rgba: 255,255,255,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        BoxLayout:
+            size_hint_y: None
+            height: 70
+            orientation: 'horizontal'
+            spacing: 5
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout :
+                orientation: 'vertical'
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    Label:
+                        text: root.text_new_project + ':'
+                        size_hint: None, None
+                        height: 30
+                        width: 120
+
+                    TextInput:
+                        size_hint_y: None
+                        height: 30
+                        id: text_new_project_input
+                        multiline: False
+                        on_text_validate: root.save_new_project(dir.path, text_new_project_input.text)
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: None, None
+                    height: 32
+                    width: 130
+
+                    Label:
+                        size_hint_x: None
+                        width: 5
+
+                    Button:
+                        text: root.text_button_back
+                        background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                        size_hint: None, None
+                        height: 25
+                        width: 80
+                        on_press: root.back_to()
+                Label:
+                    size_hint_y: None
+                    height: 5
+
+            BoxLayout:
+                size_hint_x: None
+                width: 130
+                orientation: 'vertical'
+                spacing: 1
+
+                Button:
+                    text: root.text_button_save
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.save_new_project(dir.path, text_new_project_input.text)
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+
+                Button:
+                    text: root.text_button_cancel
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.cancel()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+
+                Label:
+                    size_hint_y: None
+                    height: 5
+
+            Label:
+                size_hint_x: None
+                width: 1
+
+<PopupNewDir>
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            text: root.text_tinp
+            size_hint_y: None
+            height: 30
+            id: text_inp_new_folder
+            on_text_validate: root.make_new_dir(self.text)
+
+        Button:
+            text: 'OK'
+            size_hint_y: None
+            height: 25
+            on_press: root.make_new_dir(text_inp_new_folder.text)
+
+<SelecSite>:
+    BoxLayout:
+        orientation: 'vertical'
+        #Label:
+        #    text: root.lb_selec_the_sites
+        #    size_hint_y: None
+        #    height: 30
+        #    font_size: 17
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: dir.path
+            size_hint_y: None
+            height: 30
+            bold: True
+        Label:
+            size_hint_y: None
+            height: 1
+            canvas.before:
+                Color:
+                    rgba: 255,255,255,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        BoxLayout:
+            Label:
+                size_hint_x: None
+                width: 1
+                canvas.before:
+                    Color:
+                        rgba: 255,255,255,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            FileChooserListView:
+                id: dir
+                rootpath: o.environ['HOME']
+            Label:
+                size_hint_x: None
+                width: 1
+                canvas.before:
+                    Color:
+                        rgba: 255,255,255,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+        Label:
+            size_hint_y: None
+            height: 1
+            canvas.before:
+                Color:
+                    rgba: 255,255,255,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+
+        BoxLayout:
+            size_hint_y: None
+            height: 70
+            orientation: "horizontal"
+            spacing: 2
+            Label:
+                size_hint_x: None
+                width:5
+            BoxLayout:
+                orientation: "vertical"
+                BoxLayout:
+                    orientation: "horizontal"
+                Label:
+                    size_hint: None, None
+                    height: 31
+                    #text: root.lb_Select_Directory_with_all_Sites
+                    width: 250
+                    font_size: 12
+                    italic: True
+                Label:
+                    size_hint_y: None
+                    height: 10
+
+            BoxLayout:
+                size_hint_x: None
+                width:130
+                orientation: "vertical"
+                spacing: 1
+                Button:
+                    text: root.bt_select
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.select(dir.path)
+                    id: bt_selec
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+
+                Button:
+                    text: root.bt_cancel
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.cancel()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+                    size_hint_y: None
+                    height: 5
+            Label:
+                size_hint_x: None
+                width: 4
+
+<SelecSitePath>:
+    BoxLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            id: lay_box_sites
+            Label:
+                text: root.lb_select_the_sites
+                size_hint_y: None
+                height: 50
+                font_size: 17
+                canvas.before:
+                    Color:
+                        rgba: 220,220,220,.3
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                    text: root.lb_site
+                    size_hint_x: None
+                    width: 130
+                Label:
+                    text: root.lb_equipment
+                    size_hint_x: None
+                    width: 80
+                Label
+                    text: root.lb_path
+                Label:
+                    size_hint_x: None
+                    width: 28
+        # Buttons
+        Label:
+            size_hint_x: None
+            width: 1
+            canvas.before:
+                Color:
+                    rgba: 255,255,255,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 200
+            spacing: 2
+            canvas.before:
+                Color:
+                    rgba: 220,220,220,.05
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_add_site
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.open_pop_new_site()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_remove_site
+                    size_hint: None, None
+                    id: bt_remove_site
+                    width: 130
+                    height: 30
+                    on_press: root.remove_site()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            Label:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_automatically
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.auto_fill()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_help
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.help()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            Label:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_next
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.next()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                Button:
+                    text: root.bt_cancel
+                    size_hint: None, None
+                    width: 130
+                    height: 30
+                    on_press: root.cancel()
+                    background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                Label:
+            Label:
+
+<PopupNewSite>
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+        TextInput:
+            multiline: False
+            size_hint_y: None
+            height: 30
+            id: text_inp_new_site
+            on_text_validate: root.make_new_site(self.text)
+        Label:
+
+        BoxLayout:
+            size_hint_y: None
+            height: 25
+            BoxLayout:
+                size_hint: None, None
+                size: 25, 25
+                CheckBox:
+                    group: 'equipment'
+                    id: check_ADU06
+            Label:
+                text: 'ADU06'
+                id: lb_check_ADU06
+            BoxLayout:
+                size_hint: None, None
+                size: 25, 25
+                CheckBox:
+                    group: 'equipment'
+                    id: check_ADU07
+            Label:
+                text: 'ADU07'
+                id: lb_check_ADU07
+            BoxLayout:
+                size_hint: None, None
+                size: 25, 25
+                CheckBox:
+                    group: 'equipment'
+                    id: check_Lims
+            Label:
+                text: 'Lims'
+                id: lb_check_Lims
+        Button:
+            text: 'OK'
+            size_hint_y: None
+            height: 30
+            on_press: root.make_new_site(text_inp_new_site.text)
+            background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+
+<SelectAutoFillSites>
+    orientation: 'vertical'
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+                size_hint_x: None
+                width: 10
+            Label:
+                text: root.lb_Directory_path_containing_all_sites
+
+
+            Label:
+                size_hint_x: None
+                width: 30
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            spacing: 5
+            Label:
+                size_hint_x: None
+                width: 5
+
+            TextInput:
+                id: tex_inp_path_all_sites
+                multiline: False
+            Button:
+                text: '...'
+                size_hint_x: None
+                width: 25
+                on_press: root.open_search_path_all_site()
+                background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+            Label:
+                size_hint_x: None
+                width: 5
+        Label:
+            size_hint_y: None
+            height: 30
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+                size_hint_x: None
+                width: 10
+            Label:
+                text: root.lb_Structure
+            Label:
+                size_hint_x: None
+                width: 200
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+                size_hint_x: None
+                width: 10
+            Label:
+                text: root.lb_path_all_site_site
+                id: lb_path_all_site
+            TextInput:
+                id: tex_inp_structure_site
+                font_size: 13
+
+            Label:
+                size_hint_x: None
+                width: 10
+
+        BoxLayout:
+            size_hint_y: None
+            height: 20
+            Label:
+                size_hint_x: None
+                width: 10
+            Label:
+                text: '* Ex.: site/gms06'
+                font_size: 12
+                italic: True
+            Label:
+                size_hint_x: None
+                width: 150
+        Label:
+            size_hint_y: None
+            height: 20
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+                size_hint_x: None
+                width: 10
+            Label:
+                text: root.lb_equipment + ':'
+                size_hint_x: None
+                width: 150
+            BoxLayout:
+                size_hint_y: None
+                height: 25
+                BoxLayout:
+                    size_hint: None, None
+                    size: 25, 25
+                    CheckBox:
+                        group: 'equipment'
+                        id: check_ADU06
+                Label:
+                    text: 'ADU06'
+                    id: lb_check_ADU06
+                BoxLayout:
+                    size_hint: None, None
+                    size: 25, 25
+                    CheckBox:
+                        group: 'equipment'
+                        id: check_ADU07
+                Label:
+                    text: 'ADU07'
+                    id: lb_check_ADU07
+                BoxLayout:
+                    size_hint: None, None
+                    size: 25, 25
+                    CheckBox:
+                        group: 'equipment'
+                        id: check_Lims
+                Label:
+                    text: 'Lims'
+                    id: lb_check_Lims
+
+
+        Label:
+            size_hint_y: None
+            height: 20
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            spacing: 5
+            Label:
+            Button:
+                text: 'OK'
+                size_hint_x: None
+                width: 130
+                background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+                on_press: root.auto_fill()
+
+            Button:
+                text: root.bt_cancel
+                size_hint_x: None
+                width: 130
+                on_press: root.cancel()
+                background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+            Label:
+                size_hint_x: None
+                width: 5
+
+        Label:
+            size_hint_y: None
+            height: 5
+
+
+<PopupConvertBinAsc>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+            Button:
+                text: 'OK'
+                size_hint_x: None
+                width: 130
+                on_press: root.bt_ok()
+                background_normal: 'source/kivy_pampamt/fig_kivyppmt/background_button_black.png'
+            Label:
+
+# Open Project
+<ScreenOpenProject>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            canvas.before:
+                Color:
+                    rgba: .25,.25,.25,1.
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: root.lb_select_project
+            size_hint_y: None
+            height: 30
+            font_size: 20
+        Label:
+            canvas.before:
+                Color:
+                    rgba: .25,.25,.25,1.
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: dir_select.path
+            size_hint_y: None
+            height: 30
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 1.,1.,1.,1.
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint_y: None
+            height: 1
+        BoxLayout:
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 1.,1.,1.,1.
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint_x: None
+                width: 1
+
+            FileChooserListView:
+                id: dir_select
+                rootpath: o.environ['HOME']
+                filters: ['*.ppmt']
+                on_submit: root.select(dir_select.selection)
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgba: 1.,1.,1.,1.
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint_x: None
+                width: 1
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 1.,1.,1.,1.
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint_y: None
+            height: 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: 75
+            canvas.before:
+                Color:
+                    rgba: .10,.10,.10,1.
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Label:
+            BoxLayout:
+                size_hint_x: None
+                width: 130
+                orientation: 'vertical'
+                Label:
+                ButtonBlack:
+                    width: 130
+                    text: root.bt_select
+                    on_press: root.select(dir_select.selection)
+                Label:
+                ButtonBlack:
+                    text: root.bt_cancel
+                    on_press: root.cancel()
+                    width: 130
+                Label:
+            Label:
+                size_hint_x: None
+                width: 5
+
+
+
+

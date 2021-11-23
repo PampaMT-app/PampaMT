@@ -1,0 +1,378 @@
+#: import o os
+#: import plotz source.tools.plotZ
+
+<LabelDivX@Label>:
+    size_hint_y: None
+    height: 1
+    canvas.before:
+        Color:
+            rgba: 1.,1.,1.,.5
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<LabelDivY@Label>:
+    size_hint_x: None
+    width: 1
+    canvas.before:
+        Color:
+            rgba: 1.,1.,1.,.5
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<ScreenSuper>:
+    orientation: 'vertical'
+
+    ActionBar:
+        pos_hint: {'top': 1}
+        height: 40
+
+
+        ActionView:
+            use_separator: True
+
+            ActionPrevious:
+                title: root.lang_site_edit
+                with_previous: False
+                on_press: root.open_sites_in_bar()
+                app_icon: o.environ['HOME'] + '/.PampaMT/image/logo3.png'
+                app_icon_height: 38
+                app_icon_width: 38
+
+            ActionGroup:
+                text: root.lang_file
+                mode: 'spinner'
+
+                ActionButton:
+                    text: root.lang_new_project
+                    on_press: root.open_not_implemented('Log_New_Projects', 300, 100)
+
+                ActionButton:
+                    text: root.lang_open_project
+                    on_press: root.open_not_implemented('Log_open_project', 300, 100)
+
+                ActionButton:
+                    text: root.lang_restore_project
+                    on_press: root.open_not_implemented('Log_restore_project', 300, 100)
+
+                ActionButton:
+                    text: root.lang_view_all_project
+                    on_press: root.open_not_implemented('Log_view_all_project', 300, 100)
+
+                ActionButton:
+                    text: root.lang_set_project
+                    on_press: root.open_not_implemented('Log_set_project', 300, 100)
+
+                ActionButton:
+                    text: root.lang_exit
+                    on_press: root.open_not_implemented('Log_exit', 300, 100)
+
+            ActionGroup:
+                text: root.lang_site
+                mode: 'spinner'
+
+                ActionButton:
+                    text: root.lang_add_site
+                    on_press: root.open_not_implemented('Log_add_site', 300, 100)
+
+                ActionButton:
+                    text: root.lang_remove_site
+                    on_press: root.open_not_implemented('Log_remove_site', 300, 100)
+
+                ActionButton:
+                    text: root.lang_add_data_file
+                    on_press: root.open_not_implemented('Log_add_data_file', 350, 100)
+
+                ActionButton:
+                    text: root.lang_set_site
+                    on_press: root.open_not_implemented('Log_set_site', 300, 100)
+
+                ActionButton:
+                    text: root.lang_change_site
+                    on_press: root.open_not_implemented('Log_change_site', 300, 100)
+
+            ActionGroup:
+                text: root.lang_tools
+                mode: 'spinner'
+
+                ActionButton:
+                    text: root.lang_rhoplus
+                    on_press: root.open_rhoplus()
+
+                ActionButton:
+                    text: root.lang_convert_format
+                    on_press: root.open_not_implemented('Log_convert_format', 300, 100)
+
+                ActionButton:
+                    text: root.lang_bash_console
+                    on_press: root.open_not_implemented('Log_bash_console', 300, 100)
+
+            ActionGroup:
+                text: root.lang_settings
+
+                ActionButton:
+                    text: root.lang_language
+                    on_press: root.open_not_implemented('Log_language', 300, 100)
+
+            ActionGroup:
+                text: root.lang_view
+
+                ActionButton:
+                    text: root.lang_time_series
+                    on_press: root.open_not_implemented('Log_time_series', 300, 100)
+
+                ActionButton:
+                    text: root.lang_pseudo_section
+                    on_press: root.open_not_implemented('Log_pseudo_section', 490, 100)
+
+                ActionButton:
+                    text: root.lang_map_stations
+                    on_press: root.open_not_implemented('Log_map_stations', 300, 100)
+
+            ActionGroup:
+                text:   root.lang_export
+                mode: 'spinner'
+
+                ActionButton:
+                    text: root.lang_figure_station
+                    on_press: plotz.export_matplotlib_jones(root.lang_site_edit)
+
+            ActionGroup:
+                text: root.lang_help
+                mode: 'spinner'
+
+                ActionButton:
+                    text: root.lang_about
+                    on_press: root.open_not_implemented('Log_about', 300, 100)
+
+                ActionButton:
+                    text: root.lang_tutorial
+                    on_press: root.open_not_implemented('Log_tutorial', 300, 100)
+
+                ActionButton:
+                    text: root.lang_update
+                    on_press: root.open_not_implemented('Log_update', 300, 100)
+
+    ScrollView:
+        size_hint_y: None
+        height: 0
+        id: scroll_view
+        BoxLayout:
+            size_hint: None, None
+            height: 30
+            id: box_lay_sites
+
+    LabelDivX:
+
+    BoxLayout:
+        BoxLayout:
+            orientation: 'vertical'
+
+
+            FloatLayout:
+                id: plot_1
+                canvas.before:
+                    Color:
+                        rgba: 1., 1., 1., 1.
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                FloatLayout:
+                    id: plot_1_point
+
+
+            LabelDivX:
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                orientation: 'vertical'
+                Label:
+                BoxLayout:
+                    size_hint_y: None
+                    height: 30
+                    spacing: 5
+                    ButtonBlack:
+                        text: root.lang_select_period
+                        height: 25
+                        on_press: root.on_press_select_period()
+                        id: bt_select_period
+                    ButtonBlack:
+                        text: root.lang_set_color
+                        height: 25
+                        on_press: root.on_press_set_color()
+                    ButtonBlack:
+                        text: root.lang_change_view
+                        height: 25
+
+                    ButtonBlack:
+                        text: 'Plot'
+                        height: 25
+                        on_press: root.on_press_plot()
+
+                    Label:
+                Label:
+                    size_hint_y: None
+                    height: 2
+
+        LabelDivY:
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1.
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 0
+            id: box_lay_set_color
+            ScrollView:
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    id: box_list_color
+
+            LabelDivX:
+            Label:
+                size_hint_y: None
+                height: 10
+            LabelDivX:
+
+            BoxLayout:
+
+                canvas.before:
+                    Color:
+                        rgba: .2, .2, .2, 1.
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                size_hint_y: None
+                height: 300
+                ColorPicker:
+                    id: color_select
+            LabelDivX:
+            Label:
+                size_hint_y: None
+                height: 5
+            Button:
+                size_hint_y: None
+                size_hint_x: None
+
+                height: 25
+                text: 'Ok'
+                on_press: root.set_color_ok()
+                width: 350
+
+        LabelDivY:
+        ScrollView:
+            size_hint_x: None
+            width: 370
+            FloatLayout:
+                canvas.before:
+                    Color:
+                        rgba: 1., 1., 1., 1.
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                id: plot_2
+                size_hint_y: None
+                height: 1090
+                FloatLayout:
+                    size: plot_2.size
+                    pos: plot_2.pos
+                    id: plot_2_point
+
+
+    LabelDivX:
+
+    BoxLayout:
+        size_hint_y: None
+        height: 110
+        id: box_window
+
+    LabelDivX:
+
+    BoxLayout:
+        size_hint_y: None
+        height: 6
+
+        Label:
+        ProgressBar:
+            value: 0
+            size_hint_x: None
+            width: 300
+            id: progress_bar
+        Label:
+            size_hint_x: None
+            width: 30
+
+    LabelDivX:
+    Label:
+        size_hint_y: None
+        height: 2
+
+    BoxLayout:
+        size_hint_y: None
+        height: 30
+        spacing: 5
+        Label:
+            text: 'Log:'
+
+        ButtonBlack:
+            text: root.lang_select_site
+            on_press: root.open_not_implemented('Log_change_site', 300, 100)
+        ButtonBlack:
+            text: root.lang_tojone
+            on_press: root.on_press_tojones()
+
+        Label:
+            size_hint_x: None
+            width: 0
+    Label:
+        size_hint_y: None
+        height: 5
+
+<LaySelectPlot>
+
+
+<ScrollBox>
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 1., 1., 1., .7
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    LabelDivX:
+    ScrollView:
+
+        GridLayout:
+            id: grid
+            rows: 3
+            spacing: 3
+
+<ViewFileActive>:
+    orientation: 'vertical'
+    size_hint: None, None
+    height: 170
+    width: 300
+    ScrollView:
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: .8, .8, .8, 1.
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            orientation: 'vertical'
+            size_hint: None, None
+            width: 300
+            id: lay_view_file_active
+
+
+
+
