@@ -1,0 +1,47 @@
+#: import o os
+
+
+<Screen>:
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                size_hint_y: None
+                height: 30
+                Label:
+                    text: 'KEY'
+                Label:
+                    text: 'TRAD'
+            BoxLayout:
+                id: screen_dic
+
+        BoxLayout:
+            size_hint_x: None
+            width: 280
+            orientation: 'vertical'
+            FileChooserListView:
+                id: dir
+                rootpath: o.environ['HOME'] + '/.PampaMT'
+                on_submit: root.open(dir.selection)
+            BoxLayout:
+                size_hint_y: None
+                height: 60
+                spacing: 1
+                orientation: 'vertical'
+
+                BoxLayout:
+                    Button:
+                        text: '+'
+                        on_press: root.add()
+
+                BoxLayout:
+
+                    Button:
+                        text: 'Open'
+                        on_press: root.open(dir.selection)
+                    Button:
+                        text: 'Save'
+                        on_press: root.save()
+
+
